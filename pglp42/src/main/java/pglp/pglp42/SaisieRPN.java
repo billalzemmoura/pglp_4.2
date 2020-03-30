@@ -3,22 +3,53 @@ package pglp.pglp42;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * @author bill
+ *
+ */
 public class SaisieRPN {
-	boolean undoable = false;
-	Stack<Integer> pile = new Stack<Integer>();
-	int ope1 = 0;
-	int ope2 = 0;
-	Addition addition = new Addition();
-	Soustraction soustraction = new Soustraction();
-	Multiplication multiplication = new Multiplication();
-	Division division = new Division();
-	Undo undo = new Undo();
-	Quit quite = new Quit();
 
-	Interpreteur interpreteur = new Interpreteur();
+    /**
+    */
+	private boolean undoable = false;
+	/**
+	 */
+	private Stack<Integer> pile = new Stack<Integer>();
+     /** 
+	 */
+	private int ope1 = 0;
+	/**
+	 */
+	private int ope2 = 0;
+	/**
+	 */
+	private Addition addition = new Addition();
+	/**
+	 */
+	private Soustraction soustraction = new Soustraction();
+	/**
+	 */
+	private Multiplication multiplication = new Multiplication();
+	/**
+	 */
+	private Division division = new Division();
+	/**
+	 */
+	private Undo undo = new Undo();
+	/** 
+	 */
+	private Quit quite = new Quit();
 
-	MoteurRPN moteur = new MoteurRPN();
+	/**
+	 */
+	private Interpreteur interpreteur = new Interpreteur();
 
+	/**
+	 */
+	private MoteurRPN moteur = new MoteurRPN();
+
+	/**
+	 */
 	public SaisieRPN() {
 
 		SpecifiqueCommand add = addition::apply;
@@ -35,7 +66,10 @@ public class SaisieRPN {
 		this.interpreteur.Addcommande("quit", qui);
 	}
 
-	public void excInter(String NomCommande) {
+	/**
+	 * @param NomCommande
+	 */
+	public final void excInter(final String NomCommande) {
 		if (interpreteur.ExisteCommande(NomCommande)) {
 
 			if (undoable) {
@@ -46,15 +80,26 @@ public class SaisieRPN {
 		}
 	}
 
-	public boolean ExisteCommandeMoteur(String NomCommande) {
+	/**
+	 * @param NomCommande
+	 * @return {@link Boolean}
+	 */
+	public final boolean ExisteCommandeMoteur(String NomCommande) {
 		return moteur.existeCommande(NomCommande);
 	}
 
-	public boolean ExisteCommandeInterpreteur(String NomCommande) {
+	/**
+	 * @param NomCommande
+	 * @return boolean
+	 */
+	public final boolean ExisteCommandeInterpreteur(String NomCommande) {
 		return interpreteur.ExisteCommande(NomCommande);
 	}
 
-	public void excMoteur(String NomCommande) {
+	/**
+	 * @param NomCommande
+	 */
+	public final void excMoteur(String NomCommande) {
 		// interpreteur.ExcuteCommande(NomCommande);
 		if (pile.size() > 1) {
 
@@ -67,7 +112,9 @@ public class SaisieRPN {
 		}
 	}
 
-	public void setOperande() {
+	/**
+	 */
+	public final void setOperande() {
 		if (pile.size() > 1) {
 			this.ope1 = pile.pop();
 			this.ope2 = pile.pop();
@@ -77,14 +124,20 @@ public class SaisieRPN {
 
 	}
 
-	public void ItInteger(int operande) {
+	/**
+	 * @param operande
+	 */
+	public final void ItInteger(int operande) {
 
 		moteur.save(operande, this.pile);
 		setOperande();
 		undoable = false;
 	}
 
-	public String saisie() {
+	/**
+	 * @return {@link String}
+	 */
+	public final String saisie() {
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println(
@@ -94,7 +147,10 @@ public class SaisieRPN {
 
 	}
 
-	public Stack<Integer> getStack() {
+	/**
+	 * @return Stack<Integer>
+	 */
+	public final Stack<Integer> getStack() {
 		return pile;
 	}
 }
