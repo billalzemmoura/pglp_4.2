@@ -51,11 +51,12 @@ public class SaisieRPN {
 	/**
 	 */
 	public SaisieRPN() {
-
+int i=0;
 		SpecifiqueCommand add = addition::apply;
 		SpecifiqueCommand sous = soustraction::apply;
 		SpecifiqueCommand mult = multiplication::apply;
 		SpecifiqueCommand div = division::apply;
+		
 		this.moteur.Addcommande("+", add);
 		this.moteur.Addcommande("-", sous);
 		this.moteur.Addcommande("*", mult);
